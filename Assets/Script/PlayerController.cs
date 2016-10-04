@@ -16,13 +16,17 @@ public class PlayerController : MonoBehaviour {
 	public GameObject shot;
 	public Transform shotSpawn;
 
+	public float fireRate;
+	private float nextFire;
+
 	void Start(){
 		rb = GetComponent<Rigidbody> ();
 	}
 
 	void Update(){
-		if (Input.GetKey (KeyCode.Space)) {
+		if (Input.GetKey (KeyCode.Space) && Time.time > nextFire) {
 			Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
+			nextFire = Time.time + fireRate;
 		}
 	}
 
